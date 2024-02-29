@@ -4,8 +4,17 @@
 	margin: 0;
 	padding: 0;
 	border-style: border-box;
-	font-size: 16px;
 }
+
+/* TO DO -- Add styles for light & dark modes 
+
+:root {
+
+}
+
+html {
+	color-scheme: light dark;
+} */
 
 body {
 	margin: 0;
@@ -15,10 +24,53 @@ body {
 	font-size: 18px;
 }
 
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 800px;
+	margin: auto;
+	height: 100vh;
+}
+
+header {
+	display: flex;
+	margin: 2rem auto;
+}
+
+.title {
+	margin: 2rem 0;
+}
+
+.todos {
+	margin: 2rem 0;
+}
+
+.task-label-group {
+	cursor: grab;
+}
+
+.task {
+	cursor: grab;
+}
+li {
+	list-style: none;
+}
+
 .attribution {
 	font-size: 11px;
 	text-align: center;
 }
 .attribution a {
 	color: hsl(228, 45%, 44%);
+}
+
+.visually-hidden {
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	overflow: hidden;
+	position: absolute !important;
+	white-space: nowrap;
+	width: 1px;
 }

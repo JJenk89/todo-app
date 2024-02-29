@@ -1,20 +1,16 @@
-import Footer from "./Footer";
-import Header from "./Header";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import "./index.css";
-import TodoList from "./TodoList";
+import TodoList from "./components/TodoList";
 
 function App() {
 	return (
 		<div className="App">
-			<Header />
 			<div className="wrapper">
-				<TodoList taskName="random task" />
-				<section className="listStates">
-					items left | All | Active | Completed | Clear Completed
-				</section>
+				<Header />
+				<TodoList />
+				<p>Drag and drop to reorder list</p>
 			</div>
-			<p>Drag and drop to reorder list</p>
-
 			<Footer />
 		</div>
 	);
