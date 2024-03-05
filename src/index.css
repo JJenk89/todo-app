@@ -53,6 +53,7 @@ header {
 .task {
 	cursor: grab;
 }
+
 li {
 	list-style: none;
 }

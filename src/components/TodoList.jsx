@@ -1,11 +1,23 @@
 import { useState, useRef } from "react";
+import ListFilters from "./ListFilters";
 
 const TodoList = () => {
 	const [tasks, setTasks] = useState(["Random Task 1", "Eat", "Code"]);
 	const [newTask, setNewTask] = useState("");
+	const [checkedState, setCheckedState] = useState(
+		new Array(tasks.length).fill(false)
+	);
 
 	const dragItem = useRef(null);
 	const dragOverItem = useRef(null);
+
+	function handleOnCheck(position) {
+		const updateCheckedState = checkedState.map((task, index) =>
+			index === position ? !task : task
+		);
+
+		setCheckedState(updateCheckedState);
+	}
 
 	function handleInputChange(e) {
 		setNewTask(e.target.value);
@@ -16,6 +28,7 @@ const TodoList = () => {
 		if (newTask.trim() !== "") {
 			setTasks((t) => [...t, newTask]);
 			setNewTask("");
+			setCheckedState((t) => [...t, false]);
 			e.preventDefault();
 		}
 	}
@@ -23,6 +36,10 @@ const TodoList = () => {
 	function deleteTask(id) {
 		const updatedTasks = tasks.filter((_, i) => i !== id);
 		setTasks(updatedTasks);
+
+		const updatedCheckedState = checkedState.filter((_, i) => i !== id);
+
+		setCheckedState(updatedCheckedState);
 	}
 
 	//Prevents form submitting when task input is empty
@@ -33,8 +50,12 @@ const TodoList = () => {
 	//Drag functions
 	function handleSort() {
 		let t = [...tasks];
+		let c = [...checkedState];
 		const draggedItemContent = t.splice(dragItem.current, 1)[0];
 		t.splice(dragOverItem.current, 0, draggedItemContent);
+
+		const draggedCheckedContent = c.splice(dragItem.current, 1)[0];
+		c.splice(dragOverItem.current, 0, draggedCheckedContent);
 
 		//reset refs
 		dragItem.current = null;
@@ -42,6 +63,7 @@ const TodoList = () => {
 
 		//update array
 		setTasks(t);
+		setCheckedState(c);
 	}
 
 	return (
@@ -75,9 +97,15 @@ const TodoList = () => {
 							onDragEnd={handleSort}
 							onDragOver={(e) => e.preventDefault}
 						>
-							<input type="checkbox" name="task" />
+							<input
+								type="checkbox"
+								name="task"
+								id="taskBox"
+								checked={checkedState[id]}
+								onChange={() => handleOnCheck(id)}
+							/>
 							<label htmlFor="task" className="task">
-								{task}
+								{checkedState[id] ? <del>{task}</del> : task}
 							</label>
 							<button
 								className="delete-btn"
@@ -91,48 +119,7 @@ const TodoList = () => {
 				))}
 			</ul>
 
-			<div className="list-filters">
-				<p className="items-left">{tasks.length} items left</p>
-
-				<button
-					type="button"
-					className="btn toggle-btn"
-					aria-pressed="true"
-				>
-					<span className="visually-hidden">Show</span>
-					All
-					<span className="visually-hidden">Tasks</span>
-				</button>
-
-				<button
-					type="button"
-					className="btn toggle-btn"
-					aria-pressed="true"
-				>
-					<span className="visually-hidden">Show</span>
-					Active
-					<span className="visually-hidden">Tasks</span>
-				</button>
-
-				<button
-					type="button"
-					className="btn toggle-btn"
-					aria-pressed="true"
-				>
-					<span className="visually-hidden">Show</span>
-					Completed
-					<span className="visually-hidden">Tasks</span>
-				</button>
-
-				<button
-					type="button"
-					className="btn toggle-btn"
-					aria-pressed="true"
-				>
-					Clear Completed
-					<span className="visually-hidden">Tasks</span>
-				</button>
-			</div>
+			<ListFilters task={tasks} />
 		</>
 	);
 };
