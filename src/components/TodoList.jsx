@@ -2,16 +2,23 @@ import { useState, useRef } from "react";
 import ListFilters from "./ListFilters";
 
 const TodoList = () => {
-	const [tasks, setTasks] = useState(["Random Task 1", "Eat", "Code"]);
+	//STATE
+	const [tasks, setTasks] = useState([
+		{ id: 0, name: "Random Task 1", check: true },
+		{ id: 1, name: "Eat", check: true },
+		{ id: 2, name: "Code", check: true },
+	]);
 	const [newTask, setNewTask] = useState("");
 	const [checkedState, setCheckedState] = useState(
 		new Array(tasks.length).fill(false)
 	);
 
+	//REFS
 	const dragItem = useRef(null);
 	const dragOverItem = useRef(null);
 
 	function handleOnCheck(position) {
+		//Allows individual checking of boxes
 		const updateCheckedState = checkedState.map((task, index) =>
 			index === position ? !task : task
 		);
@@ -34,11 +41,12 @@ const TodoList = () => {
 	}
 
 	function deleteTask(id) {
+		//Updated tasks array and deletes based on id
 		const updatedTasks = tasks.filter((_, i) => i !== id);
 		setTasks(updatedTasks);
 
+		//Updates checkbox array and filters deletes tasks based on id
 		const updatedCheckedState = checkedState.filter((_, i) => i !== id);
-
 		setCheckedState(updatedCheckedState);
 	}
 
@@ -64,6 +72,12 @@ const TodoList = () => {
 		//update array
 		setTasks(t);
 		setCheckedState(c);
+	}
+
+	//List filter functions TODO: PASS TO COMPONENT AS PROPS
+	function handleClearCompleted(id) {
+		const clearedTasks = [];
+		setTasks(clearedTasks);
 	}
 
 	return (
@@ -119,7 +133,11 @@ const TodoList = () => {
 				))}
 			</ul>
 
-			<ListFilters task={tasks} />
+			<ListFilters
+				task={tasks}
+				clear={handleClearCompleted}
+				checked={checkedState}
+			/>
 		</>
 	);
 };

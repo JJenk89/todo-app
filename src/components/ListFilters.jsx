@@ -1,4 +1,4 @@
-const ListFilters = ({ task }) => {
+const ListFilters = ({ task, clear }) => {
 	return (
 		<div className="list-filters">
 			<p className="items-left">{task.length} items left</p>
@@ -37,6 +37,7 @@ const ListFilters = ({ task }) => {
 				type="button"
 				className="btn toggle-btn"
 				aria-pressed="true"
+				onClick={() => clear()}
 			>
 				Clear Completed
 				<span className="visually-hidden">Tasks</span>
