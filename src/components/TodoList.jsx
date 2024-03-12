@@ -1,41 +1,46 @@
 import { useState, useRef } from "react";
 import ListFilters from "./ListFilters";
-
+let taskItems = [
+	{ id: 0, name: "Random Task 1", check: false },
+	{ id: 1, name: "Eat", check: false },
+	{ id: 2, name: "Code", check: false },
+];
 const TodoList = () => {
 	//STATE
-	const [tasks, setTasks] = useState([
-		{ id: 0, name: "Random Task 1", check: true },
-		{ id: 1, name: "Eat", check: true },
-		{ id: 2, name: "Code", check: true },
-	]);
+
+	const [tasks, setTasks] = useState(taskItems);
 	const [newTask, setNewTask] = useState("");
-	const [checkedState, setCheckedState] = useState(
-		new Array(tasks.length).fill(false)
-	);
 
 	//REFS
 	const dragItem = useRef(null);
 	const dragOverItem = useRef(null);
 
-	function handleOnCheck(position) {
+	function handleOnCheck(id) {
 		//Allows individual checking of boxes
-		const updateCheckedState = checkedState.map((task, index) =>
-			index === position ? !task : task
+		const clonedTasks = [...tasks];
+		setTasks(
+			clonedTasks.map((t) =>
+				t.id === id ? { ...t, check: !t.check } : t
+			)
 		);
-
-		setCheckedState(updateCheckedState);
 	}
 
 	function handleInputChange(e) {
 		setNewTask(e.target.value);
 	}
 
-	function addTask(e) {
+	function addTask(e, text) {
+		let idCount = tasks.length;
 		//remove whitespace & check for empty value
+		const addedTask = {
+			name: newTask,
+			id: idCount++,
+			check: false,
+		};
+
 		if (newTask.trim() !== "") {
-			setTasks((t) => [...t, newTask]);
+			setTasks([...tasks, addedTask]);
 			setNewTask("");
-			setCheckedState((t) => [...t, false]);
 			e.preventDefault();
 		}
 	}
@@ -46,8 +51,6 @@ const TodoList = () => {
 		setTasks(updatedTasks);
 
 		//Updates checkbox array and filters deletes tasks based on id
-		const updatedCheckedState = checkedState.filter((_, i) => i !== id);
-		setCheckedState(updatedCheckedState);
 	}
 
 	//Prevents form submitting when task input is empty
@@ -58,12 +61,8 @@ const TodoList = () => {
 	//Drag functions
 	function handleSort() {
 		let t = [...tasks];
-		let c = [...checkedState];
 		const draggedItemContent = t.splice(dragItem.current, 1)[0];
 		t.splice(dragOverItem.current, 0, draggedItemContent);
-
-		const draggedCheckedContent = c.splice(dragItem.current, 1)[0];
-		c.splice(dragOverItem.current, 0, draggedCheckedContent);
 
 		//reset refs
 		dragItem.current = null;
@@ -71,7 +70,6 @@ const TodoList = () => {
 
 		//update array
 		setTasks(t);
-		setCheckedState(c);
 	}
 
 	//List filter functions TODO: PASS TO COMPONENT AS PROPS
@@ -79,6 +77,34 @@ const TodoList = () => {
 		const clearedTasks = [];
 		setTasks(clearedTasks);
 	}
+
+	const taskDataItems = tasks.map((task, id) => (
+		<li key={task.id}>
+			<div
+				className="task-label-group"
+				draggable
+				onDragStart={() => (dragItem.current = id)}
+				onDragEnter={() => (dragOverItem.current = id)}
+				onDragEnd={handleSort}
+				onDragOver={(e) => e.preventDefault}
+			>
+				<input
+					type="checkbox"
+					name="task"
+					id="taskBox"
+					checked={task.check}
+					onChange={() => handleOnCheck(task.id)}
+				/>
+				<label htmlFor="task" className="task">
+					{task.check ? <del>{task.name}</del> : task.name}
+				</label>
+				<button className="delete-btn" onClick={() => deleteTask(id)}>
+					Delete
+					<span className="visually-hidden">{taskItems.name}</span>
+				</button>
+			</div>
+		</li>
+	));
 
 	return (
 		<>
@@ -101,43 +127,10 @@ const TodoList = () => {
 			</form>
 
 			<ul className="todos" aria-labelledby="list-heading">
-				{tasks.map((task, id) => (
-					<li key={id}>
-						<div
-							className="task-label-group"
-							draggable
-							onDragStart={() => (dragItem.current = id)}
-							onDragEnter={() => (dragOverItem.current = id)}
-							onDragEnd={handleSort}
-							onDragOver={(e) => e.preventDefault}
-						>
-							<input
-								type="checkbox"
-								name="task"
-								id="taskBox"
-								checked={checkedState[id]}
-								onChange={() => handleOnCheck(id)}
-							/>
-							<label htmlFor="task" className="task">
-								{checkedState[id] ? <del>{task}</del> : task}
-							</label>
-							<button
-								className="delete-btn"
-								onClick={() => deleteTask(id)}
-							>
-								Delete
-								<span className="visually-hidden">{task}</span>
-							</button>
-						</div>
-					</li>
-				))}
+				{taskDataItems}
 			</ul>
 
-			<ListFilters
-				task={tasks}
-				clear={handleClearCompleted}
-				checked={checkedState}
-			/>
+			<ListFilters task={tasks} clear={handleClearCompleted} />
 		</>
 	);
 };
