@@ -5,11 +5,23 @@ let taskItems = [
 	{ id: 1, name: "Eat", check: false },
 	{ id: 2, name: "Code", check: false },
 ];
+
+let filteredActiveArray = [{}];
+let filteredCompleteArray = [{}];
+
 const TodoList = () => {
 	//STATE
 
 	const [tasks, setTasks] = useState(taskItems);
 	const [newTask, setNewTask] = useState("");
+	const [filteredActiveTasks, setFilteredActiveTasks] =
+		useState(filteredActiveArray);
+	const [filteredCompleteTasks, setFilteredCompleteTasks] = useState(
+		filteredCompleteArray
+	);
+	const [button, setButton] = useState("all");
+
+	let idCount = tasks.length;
 
 	//REFS
 	const dragItem = useRef(null);
@@ -29,8 +41,8 @@ const TodoList = () => {
 		setNewTask(e.target.value);
 	}
 
-	function addTask(e, text) {
-		let idCount = tasks.length;
+	//FIX ID ASSIGNEMENT BUG//
+	function addTask(e, id) {
 		//remove whitespace & check for empty value
 		const addedTask = {
 			name: newTask,
@@ -49,8 +61,6 @@ const TodoList = () => {
 		//Updated tasks array and deletes based on id
 		const updatedTasks = tasks.filter((_, i) => i !== id);
 		setTasks(updatedTasks);
-
-		//Updates checkbox array and filters deletes tasks based on id
 	}
 
 	//Prevents form submitting when task input is empty
@@ -73,9 +83,30 @@ const TodoList = () => {
 	}
 
 	//List filter functions TODO: PASS TO COMPONENT AS PROPS
-	function handleClearCompleted(id) {
-		const clearedTasks = [];
+	function handleClearCompleted() {
+		const clearedTasks = tasks.filter((task) => task.check !== true);
 		setTasks(clearedTasks);
+	}
+
+	function handleShowCompleted() {
+		const filteredCompletes = tasks.filter((task) => task.check === true);
+		setFilteredCompleteTasks(filteredCompletes);
+		setButton("completed");
+		console.log("completed clicked", filteredCompletes);
+	}
+
+	function handleShowActive() {
+		const filteredActives = tasks.filter((task) => task.check === false);
+		setFilteredActiveTasks(filteredActives);
+		setButton("active");
+		console.log("active clicked", filteredActives);
+	}
+
+	function handleShowAll() {
+		const newAllTasks = [...tasks];
+		setTasks(newAllTasks);
+		setButton("all");
+		console.log("all clicked", newAllTasks);
 	}
 
 	const taskDataItems = tasks.map((task, id) => (
@@ -100,7 +131,63 @@ const TodoList = () => {
 				</label>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
 					Delete
-					<span className="visually-hidden">{taskItems.name}</span>
+					<span className="visually-hidden">{task.name}</span>
+				</button>
+			</div>
+		</li>
+	));
+
+	const activeTasks = filteredActiveTasks.map((task, id) => (
+		<li key={task.id}>
+			<div
+				className="task-label-group"
+				draggable
+				onDragStart={() => (dragItem.current = id)}
+				onDragEnter={() => (dragOverItem.current = id)}
+				onDragEnd={handleSort}
+				onDragOver={(e) => e.preventDefault}
+			>
+				<input
+					type="checkbox"
+					name="task"
+					id="taskBox"
+					checked={task.check}
+					onChange={() => handleOnCheck(task.id)}
+				/>
+				<label htmlFor="task" className="task">
+					{task.check ? <del>{task.name}</del> : task.name}
+				</label>
+				<button className="delete-btn" onClick={() => deleteTask(id)}>
+					Delete
+					<span className="visually-hidden">{task.name}</span>
+				</button>
+			</div>
+		</li>
+	));
+
+	const completedTasks = filteredCompleteTasks.map((task, id) => (
+		<li key={task.id}>
+			<div
+				className="task-label-group"
+				draggable
+				onDragStart={() => (dragItem.current = id)}
+				onDragEnter={() => (dragOverItem.current = id)}
+				onDragEnd={handleSort}
+				onDragOver={(e) => e.preventDefault}
+			>
+				<input
+					type="checkbox"
+					name="task"
+					id="taskBox"
+					checked={task.check}
+					onChange={() => handleOnCheck(task.id)}
+				/>
+				<label htmlFor="task" className="task">
+					{task.check ? <del>{task.name}</del> : task.name}
+				</label>
+				<button className="delete-btn" onClick={() => deleteTask(id)}>
+					Delete
+					<span className="visually-hidden">{task.name}</span>
 				</button>
 			</div>
 		</li>
@@ -127,10 +214,18 @@ const TodoList = () => {
 			</form>
 
 			<ul className="todos" aria-labelledby="list-heading">
-				{taskDataItems}
+				{button === "all" && taskDataItems}
+				{button === "active" && activeTasks}
+				{button === "completed" && completedTasks}
 			</ul>
 
-			<ListFilters task={tasks} clear={handleClearCompleted} />
+			<ListFilters
+				task={tasks}
+				clear={handleClearCompleted}
+				showComplete={handleShowCompleted}
+				showActive={handleShowActive}
+				showAll={handleShowAll}
+			/>
 		</>
 	);
 };

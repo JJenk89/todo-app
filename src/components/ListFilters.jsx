@@ -1,4 +1,4 @@
-const ListFilters = ({ task, clear }) => {
+const ListFilters = ({ task, clear, showComplete, showActive, showAll }) => {
 	return (
 		<div className="list-filters">
 			<p className="items-left">{task.length} items left</p>
@@ -7,6 +7,8 @@ const ListFilters = ({ task, clear }) => {
 				type="button"
 				className="btn toggle-btn"
 				aria-pressed="true"
+				value="all"
+				onClick={() => showAll()}
 			>
 				<span className="visually-hidden">Show</span>
 				All
@@ -17,6 +19,8 @@ const ListFilters = ({ task, clear }) => {
 				type="button"
 				className="btn toggle-btn"
 				aria-pressed="true"
+				value="active"
+				onClick={() => showActive()}
 			>
 				<span className="visually-hidden">Show</span>
 				Active
@@ -27,6 +31,8 @@ const ListFilters = ({ task, clear }) => {
 				type="button"
 				className="btn toggle-btn"
 				aria-pressed="true"
+				value="completed"
+				onClick={() => showComplete()}
 			>
 				<span className="visually-hidden">Show</span>
 				Completed
