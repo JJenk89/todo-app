@@ -1,18 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ListFilters from "./ListFilters";
-let taskItems = [
-	{ id: 0, name: "Random Task 1", check: false },
-	{ id: 1, name: "Eat", check: false },
-	{ id: 2, name: "Code", check: false },
-];
 
 let filteredActiveArray = [{}];
 let filteredCompleteArray = [{}];
 
 const TodoList = () => {
 	//STATE
+	const retrievedTasks = JSON.parse(localStorage.getItem("tasks"));
 
-	const [tasks, setTasks] = useState(taskItems);
+	const [tasks, setTasks] = useState(retrievedTasks);
 	const [newTask, setNewTask] = useState("");
 	const [filteredActiveTasks, setFilteredActiveTasks] =
 		useState(filteredActiveArray);
@@ -21,12 +17,16 @@ const TodoList = () => {
 	);
 	const [button, setButton] = useState("all");
 
-	let idCount = tasks.length;
-
 	//REFS
 	const dragItem = useRef(null);
 	const dragOverItem = useRef(null);
 
+	//SAVE & RETRIEVE LISTS USING USEREF HOOK
+	useEffect(() => {
+		localStorage.setItem("tasks", JSON.stringify(tasks));
+	}, [tasks]);
+
+	//FUNCTIONS
 	function handleOnCheck(id) {
 		//Allows individual checking of boxes
 		const clonedTasks = [...tasks];
@@ -42,11 +42,11 @@ const TodoList = () => {
 	}
 
 	//FIX ID ASSIGNEMENT BUG//
-	function addTask(e, id) {
+	function addTask(e) {
 		//remove whitespace & check for empty value
 		const addedTask = {
 			name: newTask,
-			id: idCount++,
+			id: crypto.randomUUID(),
 			check: false,
 		};
 
@@ -92,21 +92,18 @@ const TodoList = () => {
 		const filteredCompletes = tasks.filter((task) => task.check === true);
 		setFilteredCompleteTasks(filteredCompletes);
 		setButton("completed");
-		console.log("completed clicked", filteredCompletes);
 	}
 
 	function handleShowActive() {
 		const filteredActives = tasks.filter((task) => task.check === false);
 		setFilteredActiveTasks(filteredActives);
 		setButton("active");
-		console.log("active clicked", filteredActives);
 	}
 
 	function handleShowAll() {
 		const newAllTasks = [...tasks];
 		setTasks(newAllTasks);
 		setButton("all");
-		console.log("all clicked", newAllTasks);
 	}
 
 	const taskDataItems = tasks.map((task, id) => (
