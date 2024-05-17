@@ -6,15 +6,29 @@
 	border-style: border-box;
 }
 
-/* TO DO -- Add styles for light & dark modes 
+/* TO DO -- Add styles for light & dark modes */
 
 :root {
+	/* LIGHT THEME COLOURS */
+	--vLightGrey: hsl(0, 0%, 98%);
+	--vLightGreyishBlue: hsl(236, 33%, 92%);
+	--lightGreyishBlue: hsl(233, 11%, 84%);
+	--darkGreyishBlue: hsl(236, 9%, 61%);
+	--vDarkGrayishBlue: hsl(235, 19%, 35%);
 
+	/* DARK THEME COLOURS */
+	--vDarkBlue: hsl(235, 21%, 11%);
+	--vDarkDesaturatedBlue: hsl(235, 24%, 19%);
+	--lightGrayishBlue: hsl(234, 39%, 85%);
+	--lightGrayishBluehover: hsl(236, 33%, 92%);
+	--darkGrayishBlue: hsl(234, 11%, 52%);
+	--vDarkGrayishBlue: hsl(233, 14%, 35%);
+	--vDarkGrayishBlue: hsl(237, 14%, 26%);
 }
 
-html {
+/* html {
 	color-scheme: light dark;
-} */
+}  */
 
 body {
 	margin: 0;
@@ -22,32 +36,77 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 18px;
+	max-width: 800px;
 }
 
 .wrapper {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	max-width: 800px;
-	margin: auto;
-	height: 100vh;
+	align-items: center;
+	margin: 0 auto;
+	background-color: var(--vLightGreyishBlue);
+	z-index: 1;
 }
 
 header {
 	display: flex;
-	margin: 2rem auto;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+	height: 25vh;
+	background: url(../public/bg-mobile-light.jpg) no-repeat;
+	background-size: cover;
+}
+
+.theme-toggle {
+	background-color: transparent;
+	color: white;
+	margin: 2rem 2rem;
 }
 
 .title {
-	margin: 2rem 0;
+	margin: 2rem 2rem;
+	color: var(--vLightGrey);
+	font-weight: 700;
+	font-size: 1.8rem;
+	letter-spacing: 0.5em;
+}
+
+button {
+	background-color: transparent;
+	border: none;
+	font-family: inherit;
+}
+
+form {
+	display: flex;
+	justify-content: space-between;
+	background-color: var(--vLightGrey);
+	padding: 0.5rem;
+	border-radius: 5px;
+	width: 80%;
+}
+
+#new-task-input {
+	border: none;
+	font-family: inherit;
 }
 
 .todos {
-	margin: 2rem 0;
+	margin: 2rem auto;
+	background-color: var(--vLightGrey);
+	width: 80%;
+	border-radius: 5px;
 }
 
 .task-label-group {
 	cursor: grab;
+	color: var(--darkGrayishBlue);
+	font-size: 0.8rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .task {
@@ -56,6 +115,46 @@ header {
 
 li {
 	list-style: none;
+	border-bottom: solid 1px var(--darkGreyishBlue);
+	padding: 0.5rem;
+}
+
+.items-left-clear {
+	display: flex;
+	justify-content: space-between;
+	background-color: var(--vLightGrey);
+	border-radius: 5px;
+	padding: 0.5rem;
+}
+
+.items-left {
+	font-size: 0.8rem;
+}
+
+.list-filters {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	margin: 1rem auto;
+	padding: 0.5rem;
+	background-color: var(--vLightGrey);
+	border-radius: 5px;
+	width: 80%;
+}
+
+.btn,
+.toggle-btn {
+	color: var(--darkGreyishBlue);
+}
+
+.toggle-btn:hover {
+	color: var(--vDarkDesaturatedBlue);
+	cursor: pointer;
+}
+
+p {
+	font-weight: 400;
+	color: var(--darkGreyishBlue);
 }
 
 .attribution {

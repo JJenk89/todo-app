@@ -1,9 +1,7 @@
-const ListFilters = ({ task, clear, showComplete, showActive, showAll }) => {
+const ListFilters = ({ showComplete, showActive, showAll }) => {
 	return (
 		<>
 			<div className="list-filters">
-				<p className="items-left">{task.length} items left</p>
-
 				<button
 					type="button"
 					className="btn toggle-btn"
@@ -37,16 +35,6 @@ const ListFilters = ({ task, clear, showComplete, showActive, showAll }) => {
 				>
 					<span className="visually-hidden">Show</span>
 					Completed
-					<span className="visually-hidden">Tasks</span>
-				</button>
-
-				<button
-					type="button"
-					className="btn toggle-btn"
-					aria-pressed="true"
-					onClick={() => clear()}
-				>
-					Clear Completed
 					<span className="visually-hidden">Tasks</span>
 				</button>
 			</div>

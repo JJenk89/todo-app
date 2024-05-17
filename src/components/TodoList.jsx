@@ -127,8 +127,18 @@ const TodoList = () => {
 					{task.check ? <del>{task.name}</del> : task.name}
 				</label>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
-					Delete
-					<span className="visually-hidden">{task.name}</span>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+					>
+						<path
+							fill="#494C6B"
+							fill-rule="evenodd"
+							d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+						/>
+					</svg>
+					<span className="visually-hidden"> delete {task.name}</span>
 				</button>
 			</div>
 		</li>
@@ -155,8 +165,18 @@ const TodoList = () => {
 					{task.check ? <del>{task.name}</del> : task.name}
 				</label>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
-					Delete
-					<span className="visually-hidden">{task.name}</span>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+					>
+						<path
+							fill="#494C6B"
+							fill-rule="evenodd"
+							d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+						/>
+					</svg>
+					<span className="visually-hidden"> delete {task.name}</span>
 				</button>
 			</div>
 		</li>
@@ -183,8 +203,18 @@ const TodoList = () => {
 					{task.check ? <del>{task.name}</del> : task.name}
 				</label>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
-					Delete
-					<span className="visually-hidden">{task.name}</span>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+					>
+						<path
+							fill="#494C6B"
+							fill-rule="evenodd"
+							d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+						/>
+					</svg>
+					<span className="visually-hidden">delete{task.name}</span>
 				</button>
 			</div>
 		</li>
@@ -214,11 +244,21 @@ const TodoList = () => {
 				{button === "all" && taskDataItems}
 				{button === "active" && activeTasks}
 				{button === "completed" && completedTasks}
+				<div className="items-left-clear">
+					<p className="items-left">{tasks.length} items left</p>
+					<button
+						type="button"
+						className="btn toggle-btn"
+						aria-pressed="true"
+						onClick={handleClearCompleted}
+					>
+						Clear Completed
+						<span className="visually-hidden">Tasks</span>
+					</button>
+				</div>
 			</ul>
 
 			<ListFilters
-				task={tasks}
-				clear={handleClearCompleted}
 				showComplete={handleShowCompleted}
 				showActive={handleShowActive}
 				showAll={handleShowAll}
