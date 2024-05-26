@@ -30,11 +30,14 @@ const TodoList = () => {
 	function handleOnCheck(id) {
 		//Allows individual checking of boxes
 		const clonedTasks = [...tasks];
+
 		setTasks(
 			clonedTasks.map((t) =>
 				t.id === id ? { ...t, check: !t.check } : t
 			)
 		);
+
+		console.log(`${id} clicked`);
 	}
 
 	function handleInputChange(e) {
@@ -116,25 +119,44 @@ const TodoList = () => {
 				onDragEnd={handleSort}
 				onDragOver={(e) => e.preventDefault}
 			>
-				<input
-					type="checkbox"
-					name="task"
-					id="taskBox"
-					checked={task.check}
-					onChange={() => handleOnCheck(task.id)}
-				/>
-				<label htmlFor="task" className="task">
-					{task.check ? <del>{task.name}</del> : task.name}
+				<label htmlFor={task.id}>
+					<input
+						type="checkbox"
+						name="task"
+						id={task.id}
+						checked={task.check}
+						onChange={() => handleOnCheck(task.id)}
+					/>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="11"
+						height="9"
+						className={`checkbox ${
+							task.check ? "checkbox--active" : ""
+						}`}
+					>
+						<path
+							fill="none"
+							stroke={task.check ? "#fff" : "none"}
+							strokeWidth="2"
+							d="M1 4.304L3.696 7l6-6"
+						/>
+					</svg>
 				</label>
+
+				<span htmlFor="task" className="task">
+					{task.check ? <del>{task.name}</del> : task.name}
+				</span>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="18"
 						height="18"
+						transform="scale(0.5)"
 					>
 						<path
 							fill="#494C6B"
-							fill-rule="evenodd"
+							fillRule="evenodd"
 							d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
 						/>
 					</svg>
@@ -154,25 +176,44 @@ const TodoList = () => {
 				onDragEnd={handleSort}
 				onDragOver={(e) => e.preventDefault}
 			>
-				<input
-					type="checkbox"
-					name="task"
-					id="taskBox"
-					checked={task.check}
-					onChange={() => handleOnCheck(task.id)}
-				/>
-				<label htmlFor="task" className="task">
-					{task.check ? <del>{task.name}</del> : task.name}
+				<label htmlFor={task.id}>
+					<input
+						type="checkbox"
+						name="task"
+						id={task.id}
+						checked={task.check}
+						onChange={() => handleOnCheck(task.id)}
+					/>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="11"
+						height="9"
+						className={`checkbox ${
+							task.check ? "checkbox--active" : ""
+						}`}
+					>
+						<path
+							fill="none"
+							stroke={task.check ? "#fff" : "none"}
+							strokeWidth="2"
+							d="M1 4.304L3.696 7l6-6"
+						/>
+					</svg>
 				</label>
+
+				<span htmlFor="task" className="task">
+					{task.check ? <del>{task.name}</del> : task.name}
+				</span>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="18"
 						height="18"
+						transform="scale(0.5)"
 					>
 						<path
 							fill="#494C6B"
-							fill-rule="evenodd"
+							fillRule="evenodd"
 							d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
 						/>
 					</svg>
@@ -192,36 +233,55 @@ const TodoList = () => {
 				onDragEnd={handleSort}
 				onDragOver={(e) => e.preventDefault}
 			>
-				<input
-					type="checkbox"
-					name="task"
-					id="taskBox"
-					checked={task.check}
-					onChange={() => handleOnCheck(task.id)}
-				/>
-				<label htmlFor="task" className="task">
-					{task.check ? <del>{task.name}</del> : task.name}
+				<label htmlFor={task.id}>
+					<input
+						type="checkbox"
+						name="task"
+						id={task.id}
+						checked={task.check}
+						onChange={() => handleOnCheck(task.id)}
+					/>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="11"
+						height="9"
+						className={`checkbox ${
+							task.check ? "checkbox--active" : ""
+						}`}
+					>
+						<path
+							fill="none"
+							stroke={task.check ? "#fff" : "none"}
+							strokeWidth="2"
+							d="M1 4.304L3.696 7l6-6"
+						/>
+					</svg>
 				</label>
+
+				<span htmlFor="task" className="task">
+					{task.check ? <del>{task.name}</del> : task.name}
+				</span>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="18"
 						height="18"
+						transform="scale(0.5)"
 					>
 						<path
 							fill="#494C6B"
-							fill-rule="evenodd"
+							fillRule="evenodd"
 							d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
 						/>
 					</svg>
-					<span className="visually-hidden">delete{task.name}</span>
+					<span className="visually-hidden"> delete {task.name}</span>
 				</button>
 			</div>
 		</li>
 	));
 
 	return (
-		<>
+		<div className="wrapper">
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="new-task-input" className="visually-hidden">
 					Enter a new task
@@ -230,14 +290,12 @@ const TodoList = () => {
 					type="text"
 					id="new-task-input"
 					className="input"
-					placeholder="Enter a new task"
+					placeholder="Create a new task..."
 					autoComplete="off"
 					onChange={handleInputChange}
 					value={newTask}
 				/>
-				<button type="submit" onClick={addTask}>
-					Add Task
-				</button>
+				<button type="submit" onClick={addTask}></button>
 			</form>
 
 			<ul className="todos" aria-labelledby="list-heading">
@@ -263,7 +321,7 @@ const TodoList = () => {
 				showActive={handleShowActive}
 				showAll={handleShowAll}
 			/>
-		</>
+		</div>
 	);
 };
 

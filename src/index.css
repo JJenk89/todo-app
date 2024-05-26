@@ -3,7 +3,7 @@
 * {
 	margin: 0;
 	padding: 0;
-	border-style: border-box;
+	box-sizing: border-box;
 }
 
 /* TO DO -- Add styles for light & dark modes */
@@ -37,16 +37,20 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 18px;
 	max-width: 800px;
+	background-color: var(--vLightGreyishBlue);
+}
+
+.app {
 }
 
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	margin: 0 auto;
-	background-color: var(--vLightGreyishBlue);
-	z-index: 1;
+	background-color: transparent;
+	height: 100vh;
 }
 
 header {
@@ -91,10 +95,11 @@ form {
 #new-task-input {
 	border: none;
 	font-family: inherit;
+	background-color: inherit;
 }
 
 .todos {
-	margin: 2rem auto;
+	margin: 1rem auto;
 	background-color: var(--vLightGrey);
 	width: 80%;
 	border-radius: 5px;
@@ -109,8 +114,35 @@ form {
 	align-items: center;
 }
 
-.task {
-	cursor: grab;
+input[type="checkbox"] {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+.checkbox {
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	background: #fff;
+	border: 2px #ddd solid;
+	margin-right: 4px;
+	border-radius: 50%;
+}
+
+.checkbox--active {
+	border-color: purple;
+	background-color: purple;
+	background: linear-gradient hsl(192, 100%, 67%);
+}
+
+.delete-btn {
+	height: 18px;
+	width: 18px;
 }
 
 li {
@@ -135,7 +167,7 @@ li {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
-	margin: 1rem auto;
+	margin: 0 auto 2rem auto;
 	padding: 0.5rem;
 	background-color: var(--vLightGrey);
 	border-radius: 5px;
@@ -152,9 +184,11 @@ li {
 	cursor: pointer;
 }
 
-p {
+.dnd-instruction {
 	font-weight: 400;
 	color: var(--darkGreyishBlue);
+	margin: 3rem;
+	font-size: 0.75rem;
 }
 
 .attribution {

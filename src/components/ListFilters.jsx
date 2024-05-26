@@ -38,7 +38,7 @@ const ListFilters = ({ showComplete, showActive, showAll }) => {
 					<span className="visually-hidden">Tasks</span>
 				</button>
 			</div>
-			<p>Drag and drop to reorder list</p>
+			<p className="dnd-instruction">Drag and drop to reorder list</p>
 		</>
 	);
 };
