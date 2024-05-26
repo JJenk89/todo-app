@@ -40,9 +40,6 @@ body {
 	background-color: var(--vLightGreyishBlue);
 }
 
-.app {
-}
-
 .wrapper {
 	display: flex;
 	flex-direction: column;
