@@ -131,6 +131,7 @@ const TodoList = () => {
 						xmlns="http://www.w3.org/2000/svg"
 						width="11"
 						height="9"
+						viewBox="-5 -4 22 18"
 						className={`checkbox ${
 							task.check ? "checkbox--active" : ""
 						}`}
@@ -143,17 +144,17 @@ const TodoList = () => {
 							className="check"
 						/>
 					</svg>
+					<span htmlFor="task" className="task">
+						{task.check ? <del>{task.name}</del> : task.name}
+					</span>
 				</label>
 
-				<span htmlFor="task" className="task">
-					{task.check ? <del>{task.name}</del> : task.name}
-				</span>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="18"
 						height="18"
-						transform="scale(0.5)"
+						transform="scale(0.6)"
 					>
 						<path
 							fill="#494C6B"
@@ -177,7 +178,7 @@ const TodoList = () => {
 				onDragEnd={handleSort}
 				onDragOver={(e) => e.preventDefault}
 			>
-				<label htmlFor={task.id}>
+				<label htmlFor={task.id} className="checkbox-container">
 					<input
 						type="checkbox"
 						name="task"
@@ -189,6 +190,7 @@ const TodoList = () => {
 						xmlns="http://www.w3.org/2000/svg"
 						width="11"
 						height="9"
+						viewBox="-5 -4 22 18"
 						className={`checkbox ${
 							task.check ? "checkbox--active" : ""
 						}`}
@@ -198,19 +200,20 @@ const TodoList = () => {
 							stroke={task.check ? "#fff" : "none"}
 							strokeWidth="2"
 							d="M1 4.304L3.696 7l6-6"
+							className="check"
 						/>
 					</svg>
+					<span htmlFor="task" className="task">
+						{task.check ? <del>{task.name}</del> : task.name}
+					</span>
 				</label>
 
-				<span htmlFor="task" className="task">
-					{task.check ? <del>{task.name}</del> : task.name}
-				</span>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="18"
 						height="18"
-						transform="scale(0.5)"
+						transform="scale(0.6)"
 					>
 						<path
 							fill="#494C6B"
@@ -234,7 +237,7 @@ const TodoList = () => {
 				onDragEnd={handleSort}
 				onDragOver={(e) => e.preventDefault}
 			>
-				<label htmlFor={task.id}>
+				<label htmlFor={task.id} className="checkbox-container">
 					<input
 						type="checkbox"
 						name="task"
@@ -246,6 +249,7 @@ const TodoList = () => {
 						xmlns="http://www.w3.org/2000/svg"
 						width="11"
 						height="9"
+						viewBox="-5 -4 22 18"
 						className={`checkbox ${
 							task.check ? "checkbox--active" : ""
 						}`}
@@ -255,19 +259,20 @@ const TodoList = () => {
 							stroke={task.check ? "#fff" : "none"}
 							strokeWidth="2"
 							d="M1 4.304L3.696 7l6-6"
+							className="check"
 						/>
 					</svg>
+					<span htmlFor="task" className="task">
+						{task.check ? <del>{task.name}</del> : task.name}
+					</span>
 				</label>
 
-				<span htmlFor="task" className="task">
-					{task.check ? <del>{task.name}</del> : task.name}
-				</span>
 				<button className="delete-btn" onClick={() => deleteTask(id)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="18"
 						height="18"
-						transform="scale(0.5)"
+						transform="scale(0.6)"
 					>
 						<path
 							fill="#494C6B"
@@ -307,7 +312,7 @@ const TodoList = () => {
 					<p className="items-left">{tasks.length} items left</p>
 					<button
 						type="button"
-						className="btn toggle-btn"
+						className="btn toggle-btn clear-completed-btn"
 						aria-pressed="true"
 						onClick={handleClearCompleted}
 					>

@@ -33,7 +33,7 @@
 #root {
 	height: 30vh;
 	background: url(../public/bg-mobile-light.jpg) no-repeat;
-	background-size: cover;
+	background-position: center center;
 }
 body {
 	margin: 0;
@@ -122,6 +122,11 @@ form {
 	align-items: center;
 }
 
+.checkbox-container {
+	display: flex;
+	align-items: center;
+}
+
 input[type="checkbox"] {
 	clip: rect(0 0 0 0);
 	clip-path: inset(50%);
@@ -133,25 +138,18 @@ input[type="checkbox"] {
 }
 
 .checkbox {
-	display: flex;
-	justify-self: center;
-	align-items: center;
-	height: 1rem;
-	width: 1rem;
+	height: 1.2rem;
+	width: 1.2rem;
 	background: #fff;
 	border: 1px #ddd solid;
 	border-radius: 50%;
+	margin-right: 1em;
 }
 
 .checkbox--active {
 	background: linear-gradient(to bottom right, #57ddff, #c058f3);
-	height: 1rem;
-	width: 1rem;
-}
-
-.check {
-	height: 5px;
-	width: 5px;
+	height: 1.2rem;
+	width: 1.2rem;
 }
 
 del {
@@ -204,9 +202,17 @@ li {
 	font-weight: 700;
 }
 
+.clear-completed-btn {
+	font-weight: 400;
+}
+
 .toggle-btn:hover {
-	color: var(--vDarkDesaturatedBlue);
+	color: hsl(215, 64%, 54%);
 	cursor: pointer;
+}
+
+.toggle-btn:active {
+	color: hsl(215, 64%, 54%);
 }
 
 .dnd-instruction {
