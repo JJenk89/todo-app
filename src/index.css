@@ -122,19 +122,26 @@ input[type="checkbox"] {
 }
 
 .checkbox {
-	display: inline-block;
-	height: 20px;
-	width: 20px;
+	display: flex;
+	justify-self: center;
+	align-items: center;
+	height: 1rem;
+	width: 1rem;
 	background: #fff;
 	border: 2px #ddd solid;
-	margin-right: 4px;
 	border-radius: 50%;
 }
 
 .checkbox--active {
-	border-color: purple;
-	background-color: purple;
-	background: linear-gradient hsl(192, 100%, 67%);
+	background: linear-gradient(to bottom right, #57ddff, #c058f3);
+
+	height: 1rem;
+	width: 1rem;
+}
+
+.check {
+	height: 5px;
+	width: 5px;
 }
 
 .delete-btn {

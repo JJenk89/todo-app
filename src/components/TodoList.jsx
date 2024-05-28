@@ -119,7 +119,7 @@ const TodoList = () => {
 				onDragEnd={handleSort}
 				onDragOver={(e) => e.preventDefault}
 			>
-				<label htmlFor={task.id}>
+				<label htmlFor={task.id} className="checkbox-container">
 					<input
 						type="checkbox"
 						name="task"
@@ -140,6 +140,7 @@ const TodoList = () => {
 							stroke={task.check ? "#fff" : "none"}
 							strokeWidth="2"
 							d="M1 4.304L3.696 7l6-6"
+							className="check"
 						/>
 					</svg>
 				</label>
