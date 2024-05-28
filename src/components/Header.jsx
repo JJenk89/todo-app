@@ -8,6 +8,7 @@ const Header = () => {
 				width="26"
 				height="26"
 				className="theme-toggle"
+				transform="scale(0.8)"
 			>
 				<path
 					fill="#FFF"

@@ -30,6 +30,11 @@
 	color-scheme: light dark;
 }  */
 
+#root {
+	height: 30vh;
+	background: url(../public/bg-mobile-light.jpg) no-repeat;
+	background-size: cover;
+}
 body {
 	margin: 0;
 	font-family: Josefin Sans, sans-serif;
@@ -55,22 +60,21 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	margin: 0 auto;
-	height: 25vh;
-	background: url(../public/bg-mobile-light.jpg) no-repeat;
-	background-size: cover;
+	padding: 0.5rem;
 }
 
 .theme-toggle {
 	background-color: transparent;
 	color: white;
 	margin: 2rem 2rem;
+	font-size: 1.5rem;
 }
 
 .title {
 	margin: 2rem 2rem;
 	color: var(--vLightGrey);
 	font-weight: 700;
-	font-size: 1.8rem;
+	font-size: 1.5rem;
 	letter-spacing: 0.5em;
 }
 
@@ -80,6 +84,12 @@ button {
 	font-family: inherit;
 }
 
+.title-wrapper {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
 form {
 	display: flex;
 	justify-content: space-between;
@@ -87,6 +97,7 @@ form {
 	padding: 0.5rem;
 	border-radius: 5px;
 	width: 80%;
+	height: 2.5rem;
 }
 
 #new-task-input {
@@ -104,8 +115,8 @@ form {
 
 .task-label-group {
 	cursor: grab;
-	color: var(--darkGrayishBlue);
-	font-size: 0.8rem;
+	color: var(--vDarkGrayishBlue);
+	font-size: 0.75rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -128,13 +139,12 @@ input[type="checkbox"] {
 	height: 1rem;
 	width: 1rem;
 	background: #fff;
-	border: 2px #ddd solid;
+	border: 1px #ddd solid;
 	border-radius: 50%;
 }
 
 .checkbox--active {
 	background: linear-gradient(to bottom right, #57ddff, #c058f3);
-
 	height: 1rem;
 	width: 1rem;
 }
@@ -144,6 +154,10 @@ input[type="checkbox"] {
 	width: 5px;
 }
 
+del {
+	color: var(--lightGrayishBlue);
+}
+
 .delete-btn {
 	height: 18px;
 	width: 18px;
@@ -151,20 +165,24 @@ input[type="checkbox"] {
 
 li {
 	list-style: none;
-	border-bottom: solid 1px var(--darkGreyishBlue);
-	padding: 0.5rem;
+	border-bottom: solid 1px var(--vLightGreyishBlue);
+	padding: 0.7rem;
+	height: 2.5rem;
 }
 
 .items-left-clear {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	background-color: var(--vLightGrey);
 	border-radius: 5px;
 	padding: 0.5rem;
+	height: 2.5rem;
+	font-size: 0.75rem;
 }
 
 .items-left {
-	font-size: 0.8rem;
+	color: var(--darkGrayishBlue);
 }
 
 .list-filters {
@@ -176,11 +194,14 @@ li {
 	background-color: var(--vLightGrey);
 	border-radius: 5px;
 	width: 80%;
+	height: 2.5rem;
 }
 
 .btn,
 .toggle-btn {
 	color: var(--darkGreyishBlue);
+	font-size: 0.75rem;
+	font-weight: 700;
 }
 
 .toggle-btn:hover {
@@ -191,7 +212,7 @@ li {
 .dnd-instruction {
 	font-weight: 400;
 	color: var(--darkGreyishBlue);
-	margin: 3rem;
+	margin: 0 auto 3rem auto;
 	font-size: 0.75rem;
 }
 
