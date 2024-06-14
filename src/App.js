@@ -2,14 +2,25 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "./index.css";
 import TodoList from "./components/TodoList";
+import { createContext, useState, useEffect } from "react";
+export const ThemeContext = createContext(null);
 
 function App() {
+	const [theme, setTheme] = useState("light");
+
+	const toggleTheme = () => {
+		setTheme((curr) => (curr === "light" ? "dark" : "light"));
+		document.body.classList.toggle("dark-body");
+	};
+
 	return (
-		<div className="App">
-			<Header />
-			<TodoList />
-			<Footer />
-		</div>
+		<ThemeContext.Provider value={{ theme, toggleTheme }}>
+			<div className="App" id={theme}>
+				<Header toggle={toggleTheme} theme={theme} />
+				<TodoList />
+				<Footer />
+			</div>
+		</ThemeContext.Provider>
 	);
 }
 
