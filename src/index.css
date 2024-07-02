@@ -27,13 +27,13 @@
 }
 
 .App {
-	height: 30vh;
+	height: 200px;
 	background: url(../public/bg-mobile-light.jpg) no-repeat;
 	background-position: center center;
 }
 
 #dark {
-	height: 30vh;
+	height: 200px;
 	background: url(../public/bg-mobile-dark.jpg) no-repeat;
 	background-position: center center;
 	background-color: var(--bkg-primary-drk);
@@ -45,7 +45,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 18px;
-	max-width: 800px;
 	background-color: var(--bkg-secondary);
 }
 
@@ -252,7 +251,7 @@ li {
 
 .btn,
 .toggle-btn {
-	color: var(--txt-primary) !important;
+	color: var(--txt-primary);
 	font-size: 0.75rem;
 	font-weight: 700;
 }
@@ -305,4 +304,79 @@ li {
 	position: absolute !important;
 	white-space: nowrap;
 	width: 1px;
+}
+
+/*	DESKTOP STYLES */
+
+@media screen and (min-width: 768px) {
+	.App {
+		background: url(../public/bg-desktop-light.jpg) no-repeat;
+		background-position: 0 0;
+		background-size: cover;
+		height: 300px;
+		width: 100vw;
+	}
+
+	#dark {
+		background: url(../public/bg-desktop-dark.jpg) no-repeat;
+		background-position: center center;
+		background-color: var(--bkg-primary-drk);
+		background-position: 0 0;
+		background-size: cover;
+		height: 300px;
+		width: 100vw;
+	}
+
+	header {
+		max-width: 550px;
+		padding-top: 2rem;
+	}
+
+	.title {
+		font-size: 2rem;
+	}
+
+	.wrapper {
+		max-width: 600px;
+		height: auto;
+	}
+
+	#new-task-input {
+		width: 100%;
+	}
+
+	form,
+	li {
+		height: 3.5rem;
+	}
+
+	.task-label-group {
+		font-size: 1rem;
+		padding: 0.5rem;
+	}
+
+	.delete-btn {
+	}
+
+	.delete-btn:hover {
+		cursor: pointer;
+		display: block;
+	}
+
+	.toggle-btn:hover {
+		color: hsl(215, 64%, 54%);
+	}
+	#dark .toggle-btn:hover {
+		color: hsl(215, 64%, 54%);
+	}
+
+	.list-filters {
+		margin: 0;
+		padding: 0;
+		width: 33%;
+	}
+
+	.dnd-instruction {
+		margin: 2rem auto;
+	}
 }

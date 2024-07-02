@@ -8,6 +8,16 @@ export const ThemeContext = createContext(null);
 function App() {
 	const [theme, setTheme] = useState("light");
 
+	useEffect(() => {
+		window
+			.matchMedia("(prefers-color-scheme: dark)")
+			.addEventListener("change", (event) => {
+				const colorScheme = event.matches ? "dark" : "light";
+				console.log(colorScheme); // "dark" or "light"
+				setTheme(colorScheme);
+			});
+	}, []);
+
 	const toggleTheme = () => {
 		setTheme((curr) => (curr === "light" ? "dark" : "light"));
 		document.body.classList.toggle("dark-body");

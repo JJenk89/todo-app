@@ -16,6 +16,10 @@ const TodoList = () => {
 		filteredCompleteArray
 	);
 	const [button, setButton] = useState("all");
+	const [windowSize, setWindowSize] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight,
+	});
 
 	//REFS
 	const dragItem = useRef(null);
@@ -25,6 +29,21 @@ const TodoList = () => {
 	useEffect(() => {
 		localStorage.setItem("tasks", JSON.stringify(tasks));
 	}, [tasks]);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setWindowSize({
+				width: window.innerWidth,
+				height: window.innerHeight,
+			});
+		};
+
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 
 	//FUNCTIONS
 	function handleOnCheck(id) {
@@ -308,25 +327,50 @@ const TodoList = () => {
 				{button === "all" && taskDataItems}
 				{button === "active" && activeTasks}
 				{button === "completed" && completedTasks}
-				<div className="items-left-clear">
-					<p className="items-left">{tasks.length} items left</p>
-					<button
-						type="button"
-						className="btn toggle-btn clear-completed-btn"
-						aria-pressed="true"
-						onClick={handleClearCompleted}
-					>
-						Clear Completed
-						<span className="visually-hidden">Tasks</span>
-					</button>
-				</div>
+
+				{windowSize.width < 600 ? (
+					<div className="items-left-clear">
+						<p className="items-left">{tasks.length} items left</p>
+
+						<button
+							type="button"
+							className="btn toggle-btn clear-completed-btn"
+							aria-pressed="true"
+							onClick={handleClearCompleted}
+						>
+							Clear Completed
+							<span className="visually-hidden">Tasks</span>
+						</button>
+					</div>
+				) : (
+					<div className="items-left-clear">
+						<p className="items-left">{tasks.length} items left</p>
+						<ListFilters
+							showComplete={handleShowCompleted}
+							showActive={handleShowActive}
+							showAll={handleShowAll}
+						/>
+						<button
+							type="button"
+							className="btn toggle-btn clear-completed-btn"
+							aria-pressed="true"
+							onClick={handleClearCompleted}
+						>
+							Clear Completed
+							<span className="visually-hidden">Tasks</span>
+						</button>
+					</div>
+				)}
 			</ul>
 
-			<ListFilters
-				showComplete={handleShowCompleted}
-				showActive={handleShowActive}
-				showAll={handleShowAll}
-			/>
+			{windowSize.width < 600 ? (
+				<ListFilters
+					showComplete={handleShowCompleted}
+					showActive={handleShowActive}
+					showAll={handleShowAll}
+				/>
+			) : null}
+			<p className="dnd-instruction">Drag and drop to reorder list</p>
 		</div>
 	);
 };
