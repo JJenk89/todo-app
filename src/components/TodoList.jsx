@@ -6,7 +6,10 @@ let filteredCompleteArray = [{}];
 
 const TodoList = () => {
 	//STATE
-	const retrievedTasks = JSON.parse(localStorage.getItem("tasks"));
+
+	const retrievedTasks = localStorage.getItem("tasks")
+		? JSON.parse(localStorage.getItem("tasks"))
+		: [];
 
 	const [tasks, setTasks] = useState(retrievedTasks);
 	const [newTask, setNewTask] = useState("");
@@ -26,6 +29,14 @@ const TodoList = () => {
 	const dragOverItem = useRef(null);
 
 	//SAVE & RETRIEVE LISTS USING USEREF HOOK
+
+	useEffect(() => {
+		let storedTasks = JSON.parse(localStorage.getItem("tasks"));
+		if (storedTasks) {
+			setTasks(storedTasks);
+		}
+	}, []);
+
 	useEffect(() => {
 		localStorage.setItem("tasks", JSON.stringify(tasks));
 	}, [tasks]);

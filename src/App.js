@@ -13,7 +13,6 @@ function App() {
 			.matchMedia("(prefers-color-scheme: dark)")
 			.addEventListener("change", (event) => {
 				const colorScheme = event.matches ? "dark" : "light";
-				console.log(colorScheme); // "dark" or "light"
 				setTheme(colorScheme);
 			});
 	}, []);

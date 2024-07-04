@@ -59,7 +59,8 @@ body {
 	align-items: center;
 	margin: 0 auto;
 	background-color: transparent;
-	height: 100vh;
+	min-height: 100vmin;
+	max-width: 480px;
 }
 
 header {
@@ -68,6 +69,7 @@ header {
 	align-items: center;
 	margin: 0 auto;
 	padding: 0.5rem;
+	max-width: 480px;
 }
 
 .theme-toggle {
@@ -306,6 +308,41 @@ li {
 	width: 1px;
 }
 
+/* LARGE MOBILE & SMALL TABLET STYLES */
+
+@media screen and (min-width: 376px) {
+	.App {
+		background: url(../public/bg-desktop-light.jpg) no-repeat;
+		background-position: 0 0;
+		background-size: cover;
+		height: 200px;
+		width: 100vw;
+	}
+
+	#dark {
+		background: url(../public/bg-desktop-dark.jpg) no-repeat;
+		background-color: var(--bkg-primary-drk);
+		background-position: 0 0;
+		background-size: cover;
+		height: 200px;
+		width: 100vw;
+	}
+}
+
+/* LARGE TABLETS */
+
+@media screen and (min-width: 600px) {
+	.list-filters {
+		margin: 0;
+		padding: 0;
+		width: 40%;
+	}
+
+	.dnd-instruction {
+		margin: 2rem auto;
+	}
+}
+
 /*	DESKTOP STYLES */
 
 @media screen and (min-width: 768px) {
@@ -313,13 +350,12 @@ li {
 		background: url(../public/bg-desktop-light.jpg) no-repeat;
 		background-position: 0 0;
 		background-size: cover;
-		height: 300px;
+		height: 15rem;
 		width: 100vw;
 	}
 
 	#dark {
 		background: url(../public/bg-desktop-dark.jpg) no-repeat;
-		background-position: center center;
 		background-color: var(--bkg-primary-drk);
 		background-position: 0 0;
 		background-size: cover;
