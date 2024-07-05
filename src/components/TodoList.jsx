@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ListFilters from "./ListFilters";
+import TaskInput from "./TaskInput";
 
 let filteredActiveArray = [{}];
 let filteredCompleteArray = [{}];
@@ -188,8 +189,7 @@ const TodoList = () => {
 				data-index={id}
 				draggable
 				onDragStart={(e) => handleDragStart(e, id)}
-				/* 				onDragEnter={() => (dragOverItem.current = id)}
-				 */ onDragEnd={handleDragEnd}
+				onDragEnd={handleDragEnd}
 				onDragOver={() => handleDragOver(id)}
 				onTouchStart={() => handleTouchStart(id)}
 				onTouchMove={handleTouchMove}
@@ -251,8 +251,7 @@ const TodoList = () => {
 				data-index={id}
 				draggable
 				onDragStart={(e) => handleDragStart(e, id)}
-				/* 				onDragEnter={() => (dragOverItem.current = id)}
-				 */ onDragEnd={handleDragEnd}
+				onDragEnd={handleDragEnd}
 				onDragOver={() => handleDragOver(id)}
 				onTouchStart={() => handleTouchStart(id)}
 				onTouchMove={handleTouchMove}
@@ -314,8 +313,7 @@ const TodoList = () => {
 				data-index={id}
 				draggable
 				onDragStart={(e) => handleDragStart(e, id)}
-				/* 				onDragEnter={() => (dragOverItem.current = id)}
-				 */ onDragEnd={handleDragEnd}
+				onDragEnd={handleDragEnd}
 				onDragOver={() => handleDragOver(id)}
 				onTouchStart={() => handleTouchStart(id)}
 				onTouchMove={handleTouchMove}
@@ -372,21 +370,12 @@ const TodoList = () => {
 
 	return (
 		<div className="wrapper">
-			<form onSubmit={handleSubmit}>
-				<label htmlFor="new-task-input" className="visually-hidden">
-					Enter a new task
-				</label>
-				<input
-					type="text"
-					id="new-task-input"
-					className="input"
-					placeholder="Create a new task..."
-					autoComplete="off"
-					onChange={handleInputChange}
-					value={newTask}
-				/>
-				<button type="submit" onClick={addTask}></button>
-			</form>
+			<TaskInput
+				handleSubmit={handleSubmit}
+				handleInputChange={handleInputChange}
+				newTask={newTask}
+				addTask={addTask}
+			/>
 
 			<ul className="todos" aria-labelledby="list-heading">
 				{button === "all" && taskDataItems}
