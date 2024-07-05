@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+# Frontend Mentor - Todo app solution
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+-   [Overview](#overview)
+    -   [The challenge](#the-challenge)
+    -   [Links](#links)
+-   [My process](#my-process)
+    -   [Built with](#built-with)
+    -   [What I learned](#what-i-learned)
+    -   [Continued development](#continued-development)
+    -   [Useful resources](#useful-resources)
+-   [Author](#author)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### The challenge
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Users should be able to:
 
-### `npm test`
+-   View the optimal layout for the app depending on their device's screen size
+-   See hover states for all interactive elements on the page
+-   Add new todos to the list
+-   Mark todos as complete
+-   Delete todos from the list
+-   Filter by all/active/complete todos
+-   Clear all completed todos
+-   Toggle light and dark mode
+-   **Bonus**: Drag and drop to reorder items on the list
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Links
 
-### `npm run build`
+-   Solution URL: [Add solution URL here](https://your-solution-url.com)
+-   Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## My process
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Built with
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-   Semantic HTML5 markup
+-   CSS custom properties
+-   Flexbox
+-   Mobile-first workflow
+-   [React](https://reactjs.org/) - JS library
 
-### `npm run eject`
+**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### What I learned
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project has taught me a lot about basic React/JavaScript fundamentals such as:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+-   Using and updating state using the useState hook
+-   Conditional rendering
+-   Rendering different state within the same page based on user clicks
+-   Using local storage to save data client side
+-   Creating drag and drop functionality from scratch for both desktop and mobile
+-   Touch events
+-   Refactoring code into smaller components
+-   The useContext hook
+-   Passing props
+-   Implementing dark and light themes into an app
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+I feel I have a much stronger grasp on these fundamentals going forward and will be able to develop future projects much more efficiently as a result.
 
-## Learn More
+To see how you can add code snippets, see below:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```html
+<h1>Some HTML code I'm proud of</h1>
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```css
+.proud-of-this-css {
+	color: papayawhip;
+}
+```
 
-### Code Splitting
+```js
+const proudOfThisFunc = () => {
+	console.log("🎉");
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
 
-### Analyzing the Bundle Size
+**Note: Delete this note and the content within this section and replace with your own learnings.**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Continued development
 
-### Making a Progressive Web App
+In future projects, I want to use all the things I've learnt so far, and hopefully find new things to do. I would like to perhaps take on a basic full-stack project or something involving data calls from an API or backend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Useful resources
 
-### Advanced Configuration
+-   [Stack Overflow](https://stackoverflow.com) - Do I need to say any more?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+-   [CSS tricks](https://css-tricks.com) - For help with styling
 
-### Deployment
+-   [MDN Webdocs](https://developer.mozilla.org/en-US/) - For Javascript info
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+-   [React documentation](https://react.dev/reference/react) - For info about hooks
 
-### `npm run build` fails to minify
+-   [Kevin Powell](https://www.youtube.com/user/KepowOb) - Amazing videos on light/dark themes and general CSS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Author
+
+-   Github - [JJenk89](https://github.com/JJenk89)
+-   Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
