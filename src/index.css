@@ -61,6 +61,7 @@ body {
 	background-color: transparent;
 	min-height: 100vmin;
 	max-width: 480px;
+	touch-action: none;
 }
 
 header {
@@ -117,6 +118,10 @@ form {
 	border: none;
 	font-family: inherit;
 	background-color: inherit;
+	width: 100%;
+}
+#new-task-input:focus {
+	outline: 0;
 }
 
 #dark #new-task-input {
@@ -272,8 +277,23 @@ li {
 	cursor: pointer;
 }
 
-.toggle-btn:active {
+#dark .toggle-btn:hover {
 	color: hsl(215, 64%, 54%);
+	cursor: pointer;
+}
+
+.toggle-btn {
+	color: var(--darkGrayishBlue);
+}
+
+.toggle-btn:focus {
+	color: hsl(215, 64%, 54%);
+	outline: 0;
+}
+
+#dark .toggle-btn:focus {
+	color: hsl(215, 64%, 54%);
+	outline: 0;
 }
 
 .dnd-instruction {
@@ -332,10 +352,19 @@ li {
 /* LARGE TABLETS */
 
 @media screen and (min-width: 600px) {
+	.theme-toggle,
+	.checkbox {
+		cursor: pointer;
+	}
+
 	.list-filters {
 		margin: 0;
 		padding: 0;
 		width: 40%;
+	}
+
+	.clear-completed-btn {
+		color: var(--darkGrayishBlue);
 	}
 
 	.dnd-instruction {
@@ -359,7 +388,7 @@ li {
 		background-color: var(--bkg-primary-drk);
 		background-position: 0 0;
 		background-size: cover;
-		height: 300px;
+		height: 15rem;
 		width: 100vw;
 	}
 
@@ -377,10 +406,6 @@ li {
 		height: auto;
 	}
 
-	#new-task-input {
-		width: 100%;
-	}
-
 	form,
 	li {
 		height: 3.5rem;
@@ -389,9 +414,6 @@ li {
 	.task-label-group {
 		font-size: 1rem;
 		padding: 0.5rem;
-	}
-
-	.delete-btn {
 	}
 
 	.delete-btn:hover {

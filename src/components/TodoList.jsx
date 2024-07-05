@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ListFilters from "./ListFilters";
 
 let filteredActiveArray = [{}];
@@ -23,10 +23,10 @@ const TodoList = () => {
 		width: window.innerWidth,
 		height: window.innerHeight,
 	});
+	const [draggingItemIndex, setDraggingItemIndex] = useState(null);
+	const [draggingItemTouchIndex, setDraggingItemTouchIndex] = useState(null);
 
 	//REFS
-	const dragItem = useRef(null);
-	const dragOverItem = useRef(null);
 
 	//SAVE & RETRIEVE LISTS USING USEREF HOOK
 
@@ -66,15 +66,12 @@ const TodoList = () => {
 				t.id === id ? { ...t, check: !t.check } : t
 			)
 		);
-
-		console.log(`${id} clicked`);
 	}
 
 	function handleInputChange(e) {
 		setNewTask(e.target.value);
 	}
 
-	//FIX ID ASSIGNEMENT BUG//
 	function addTask(e) {
 		//remove whitespace & check for empty value
 		const addedTask = {
@@ -102,23 +99,12 @@ const TodoList = () => {
 	}
 
 	//Drag functions
-	function handleSort() {
-		let t = [...tasks];
-		const draggedItemContent = t.splice(dragItem.current, 1)[0];
-		t.splice(dragOverItem.current, 0, draggedItemContent);
-
-		//reset refs
-		dragItem.current = null;
-		dragOverItem.current = null;
-
-		//update array
-		setTasks(t);
-	}
 
 	//List filter functions TODO: PASS TO COMPONENT AS PROPS
 	function handleClearCompleted() {
 		const clearedTasks = tasks.filter((task) => task.check !== true);
 		setTasks(clearedTasks);
+		setFilteredCompleteTasks(clearedTasks);
 	}
 
 	function handleShowCompleted() {
@@ -139,15 +125,75 @@ const TodoList = () => {
 		setButton("all");
 	}
 
+	////////////////////////////////
+	/////// DRAG FUNCTIONS ////////
+	////////////////////////////////
+
+	const handleDragStart = (e, id) => {
+		setDraggingItemIndex(id);
+		e.dataTransfer.effectAllowed = "move";
+	};
+
+	const handleDragOver = (id) => {
+		if (draggingItemIndex === id) return;
+		const newItems = [...tasks];
+		const draggingItem = newItems[draggingItemIndex];
+		newItems.splice(draggingItemIndex, 1);
+		newItems.splice(id, 0, draggingItem);
+		setDraggingItemIndex(id);
+		setTasks(newItems);
+	};
+
+	const handleDragEnd = () => {
+		setDraggingItemIndex(null);
+	};
+
+	////////////////////////////////
+	// TOUCHSCREEN DRAG FUNCTIONS //
+	////////////////////////////////
+
+	function handleTouchStart(id) {
+		console.log(`touched ${id}`);
+		setDraggingItemTouchIndex(id);
+	}
+
+	function handleTouchMove(e) {
+		const touchLocation = e.targetTouches[0];
+		const target = document.elementFromPoint(
+			touchLocation.clientX,
+			touchLocation.clientY
+		);
+		if (!target) return;
+
+		const targetIndex = Number(target.getAttribute("data-index"));
+		if (!isNaN(targetIndex) && draggingItemTouchIndex !== targetIndex) {
+			const newItems = [...tasks];
+			const draggingItem = newItems[draggingItemTouchIndex];
+			newItems.splice(draggingItemTouchIndex, 1);
+			newItems.splice(targetIndex, 0, draggingItem);
+			setDraggingItemTouchIndex(targetIndex);
+			setTasks(newItems);
+		}
+	}
+
+	function handleTouchEnd() {
+		console.log(`released`);
+		setDraggingItemTouchIndex(null);
+	}
+
 	const taskDataItems = tasks.map((task, id) => (
 		<li key={task.id}>
 			<div
 				className="task-label-group"
+				data-index={id}
 				draggable
-				onDragStart={() => (dragItem.current = id)}
-				onDragEnter={() => (dragOverItem.current = id)}
-				onDragEnd={handleSort}
-				onDragOver={(e) => e.preventDefault}
+				onDragStart={(e) => handleDragStart(e, id)}
+				/* 				onDragEnter={() => (dragOverItem.current = id)}
+				 */ onDragEnd={handleDragEnd}
+				onDragOver={() => handleDragOver(id)}
+				onTouchStart={() => handleTouchStart(id)}
+				onTouchMove={handleTouchMove}
+				onTouchEnd={handleTouchEnd}
 			>
 				<label htmlFor={task.id} className="checkbox-container">
 					<input
@@ -202,11 +248,15 @@ const TodoList = () => {
 		<li key={task.id}>
 			<div
 				className="task-label-group"
+				data-index={id}
 				draggable
-				onDragStart={() => (dragItem.current = id)}
-				onDragEnter={() => (dragOverItem.current = id)}
-				onDragEnd={handleSort}
-				onDragOver={(e) => e.preventDefault}
+				onDragStart={(e) => handleDragStart(e, id)}
+				/* 				onDragEnter={() => (dragOverItem.current = id)}
+				 */ onDragEnd={handleDragEnd}
+				onDragOver={() => handleDragOver(id)}
+				onTouchStart={() => handleTouchStart(id)}
+				onTouchMove={handleTouchMove}
+				onTouchEnd={handleTouchEnd}
 			>
 				<label htmlFor={task.id} className="checkbox-container">
 					<input
@@ -261,11 +311,15 @@ const TodoList = () => {
 		<li key={task.id}>
 			<div
 				className="task-label-group"
+				data-index={id}
 				draggable
-				onDragStart={() => (dragItem.current = id)}
-				onDragEnter={() => (dragOverItem.current = id)}
-				onDragEnd={handleSort}
-				onDragOver={(e) => e.preventDefault}
+				onDragStart={(e) => handleDragStart(e, id)}
+				/* 				onDragEnter={() => (dragOverItem.current = id)}
+				 */ onDragEnd={handleDragEnd}
+				onDragOver={() => handleDragOver(id)}
+				onTouchStart={() => handleTouchStart(id)}
+				onTouchMove={handleTouchMove}
+				onTouchEnd={handleTouchEnd}
 			>
 				<label htmlFor={task.id} className="checkbox-container">
 					<input

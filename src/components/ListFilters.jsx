@@ -3,6 +3,7 @@ const ListFilters = ({ showComplete, showActive, showAll }) => {
 		<>
 			<div className="list-filters">
 				<button
+					autoFocus
 					type="button"
 					className="btn toggle-btn"
 					aria-pressed="true"
