@@ -61,30 +61,11 @@ This project has taught me a lot about basic React/JavaScript fundamentals such 
 -   The useContext hook
 -   Passing props
 -   Implementing dark and light themes into an app
+-   How to deploy a React app to github
+-   How to push to a remote repository
+-   Using git to create and merge branches
 
 I feel I have a much stronger grasp on these fundamentals going forward and will be able to develop future projects much more efficiently as a result.
-
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-
-```css
-.proud-of-this-css {
-	color: papayawhip;
-}
-```
-
-```js
-const proudOfThisFunc = () => {
-	console.log("🎉");
-};
-```
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
 
 ### Continued development
 
