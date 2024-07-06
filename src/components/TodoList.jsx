@@ -154,7 +154,6 @@ const TodoList = () => {
 	////////////////////////////////
 
 	function handleTouchStart(id) {
-		console.log(`touched ${id}`);
 		setDraggingItemTouchIndex(id);
 	}
 
