@@ -86,4 +86,4 @@ In future projects, I want to use all the things I've learnt so far, and hopeful
 ## Author
 
 -   Github - [JJenk89](https://github.com/JJenk89)
--   Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+-   Frontend Mentor - [@JJenk89](https://www.frontendmentor.io/profile/JJenk89)
