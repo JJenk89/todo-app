@@ -28,12 +28,12 @@ Users should be able to:
 -   Filter by all/active/complete todos
 -   Clear all completed todos
 -   Toggle light and dark mode
--   **Bonus**: Drag and drop to reorder items on the list
+-   Drag and drop to reorder items on the list
 
 ### Links
 
 -   Solution URL: [Add solution URL here](https://your-solution-url.com)
--   Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+-   Live Site URL: [Github Pages](https://jjenk89.github.io/todo-app/)
 
 ## My process
 
@@ -44,8 +44,6 @@ Users should be able to:
 -   Flexbox
 -   Mobile-first workflow
 -   [React](https://reactjs.org/) - JS library
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
 
