@@ -166,14 +166,21 @@ const TodoList = () => {
 		);
 		if (!target) return;
 
-		const targetIndex = Number(target.getAttribute("data-index"));
-		if (!isNaN(targetIndex) && draggingItemTouchIndex !== targetIndex) {
-			const newItems = [...tasks];
-			const draggingItem = newItems[draggingItemTouchIndex];
-			newItems.splice(draggingItemTouchIndex, 1);
-			newItems.splice(targetIndex, 0, draggingItem);
-			setDraggingItemTouchIndex(targetIndex);
-			setTasks(newItems);
+		const targetIndex = parseInt(target.dataset.index, 10);
+		if (
+			Number.isInteger(targetIndex) &&
+			draggingItemTouchIndex !== targetIndex
+		) {
+			setTasks((prevTasks) => {
+				const newItems = [...prevTasks];
+				const [draggingItem] = newItems.splice(
+					draggingItemTouchIndex,
+					1
+				);
+				newItems.splice(targetIndex, 0, draggingItem);
+				setDraggingItemTouchIndex(targetIndex);
+				return newItems;
+			});
 		}
 	}
 

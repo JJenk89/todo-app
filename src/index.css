@@ -59,7 +59,7 @@ body {
 	align-items: center;
 	margin: 0 auto;
 	background-color: transparent;
-	min-height: 100vmin;
+	min-height: 100vh;
 	max-width: 480px;
 	touch-action: none;
 }
