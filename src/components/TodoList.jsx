@@ -90,8 +90,24 @@ const TodoList = () => {
 
 	function deleteTask(id) {
 		//Updated tasks array and deletes based on id
-		const updatedTasks = tasks.filter((_, i) => i !== id);
-		setTasks(updatedTasks);
+		if (button === "all") {
+			const updatedTasks = tasks.filter((_, i) => i !== id);
+			setTasks(updatedTasks);
+		}
+
+		if (button === "active") {
+			const updatedTasks = tasks.filter((_, i) => i !== id);
+			setTasks(updatedTasks);
+			setButton("all");
+		}
+
+		if (button === "completed") {
+			const updatedTasks = tasks.filter((task) => task.check !== true);
+
+			setTasks(updatedTasks);
+			setFilteredCompleteTasks(updatedTasks);
+			setButton("all");
+		}
 	}
 
 	//Prevents form submitting when task input is empty
@@ -143,6 +159,24 @@ const TodoList = () => {
 		newItems.splice(id, 0, draggingItem);
 		setDraggingItemIndex(id);
 		setTasks(newItems);
+
+		if (button === "active") {
+			const newItems = [...filteredActiveTasks];
+			const draggingItem = newItems[draggingItemIndex];
+			newItems.splice(draggingItemIndex, 1);
+			newItems.splice(id, 0, draggingItem);
+			setDraggingItemIndex(id);
+			setFilteredActiveTasks(newItems);
+		}
+
+		if (button === "completed") {
+			const newItems = [...filteredCompleteTasks];
+			const draggingItem = newItems[draggingItemIndex];
+			newItems.splice(draggingItemIndex, 1);
+			newItems.splice(id, 0, draggingItem);
+			setDraggingItemIndex(id);
+			setFilteredCompleteTasks(newItems);
+		}
 	};
 
 	const handleDragEnd = () => {
@@ -181,10 +215,44 @@ const TodoList = () => {
 				return newItems;
 			});
 		}
+
+		if (button === "active") {
+			if (
+				Number.isInteger(targetIndex) &&
+				draggingItemTouchIndex !== targetIndex
+			) {
+				setFilteredActiveTasks((prevTasks) => {
+					const newItems = [...prevTasks];
+					const [draggingItem] = newItems.splice(
+						draggingItemTouchIndex,
+						1
+					);
+					newItems.splice(targetIndex, 0, draggingItem);
+					setDraggingItemTouchIndex(targetIndex);
+					return newItems;
+				});
+			}
+		}
+		if (button === "completed") {
+			if (
+				Number.isInteger(targetIndex) &&
+				draggingItemTouchIndex !== targetIndex
+			) {
+				setFilteredCompleteTasks((prevTasks) => {
+					const newItems = [...prevTasks];
+					const [draggingItem] = newItems.splice(
+						draggingItemTouchIndex,
+						1
+					);
+					newItems.splice(targetIndex, 0, draggingItem);
+					setDraggingItemTouchIndex(targetIndex);
+					return newItems;
+				});
+			}
+		}
 	}
 
 	function handleTouchEnd() {
-		console.log(`released`);
 		setDraggingItemTouchIndex(null);
 	}
 

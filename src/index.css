@@ -61,7 +61,6 @@ body {
 	background-color: transparent;
 	min-height: 100vh;
 	max-width: 480px;
-	touch-action: none;
 }
 
 header {
@@ -133,6 +132,7 @@ form {
 	width: 80%;
 	border-radius: 5px;
 	background-color: var(--bkg-primary);
+	touch-action: none;
 }
 
 #dark .todos {
