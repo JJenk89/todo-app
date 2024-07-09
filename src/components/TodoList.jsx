@@ -60,13 +60,43 @@ const TodoList = () => {
 	//FUNCTIONS
 	function handleOnCheck(id) {
 		//Allows individual checking of boxes
-		const clonedTasks = [...tasks];
 
-		setTasks(
-			clonedTasks.map((t) =>
-				t.id === id ? { ...t, check: !t.check } : t
-			)
-		);
+		if (button === "all") {
+			const clonedTasks = [...tasks];
+			setTasks(
+				clonedTasks.map((t) =>
+					t.id === id ? { ...t, check: !t.check } : t
+				)
+			);
+		}
+
+		if (button === "active") {
+			const clonedTasks = [...tasks];
+			setFilteredActiveTasks(
+				clonedTasks.map((t) =>
+					t.id === id ? { ...t, check: !t.check } : t
+				)
+			);
+			setTasks(
+				clonedTasks.map((t) =>
+					t.id === id ? { ...t, check: !t.check } : t
+				)
+			);
+		}
+
+		if (button === "completed") {
+			const clonedTasks = [...tasks];
+			setFilteredCompleteTasks(
+				clonedTasks.map((t) =>
+					t.id === id ? { ...t, check: !t.check } : t
+				)
+			);
+			setTasks(
+				clonedTasks.map((t) =>
+					t.id === id ? { ...t, check: !t.check } : t
+				)
+			);
+		}
 	}
 
 	function handleInputChange(e) {
